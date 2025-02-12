@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Services</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: black;
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 0 1rem 4rem 1rem; /* Remove top padding */
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            color: #d1d5db;
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 42rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .service-card {
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .service-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            width: 100%;
+            border-radius: 0.75rem;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            overflow: hidden;
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+        }
+
+        .card-image {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            position: absolute;
+            inset: 0;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .icon-wrapper {
+            margin-bottom: 1rem;
+            display: inline-block;
+            padding: 0.75rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            border-radius: 9999px;
+        }
+
+        .icon-wrapper svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .learn-more {
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .card-back {
+            background: linear-gradient(to bottom right, #111827, #000000);
+            transform: rotateY(180deg);
+            padding: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-details {
+            color: #d1d5db;
+            margin: 1rem 0;
+        }
+
+        .get-started-btn {
+            margin-top: 1.5rem;
+            padding: 0.5rem 1.5rem;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .get-started-btn:hover {
+            background-color: #ffffff;
+        }
+
+        header {
+        background-color: black;
+        color: white;
+        padding: 1rem 2rem;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        border-bottom: 1px solid #333;
+    }
+
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+    }
+
+    nav ul li {
+        margin: 0;
+    }
+
+    /* Updated navigation styles */
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0;
+        transition: color 0.3s ease;
+    }
+
+    /* New hover effect for nav links */
+    nav ul li:not(.sign-up) a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #ffffff;
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.3s ease;
+    }
+
+    nav ul li:not(.sign-up) a:hover {
+        color: #ffffff;
+    }
+
+    nav ul li:not(.sign-up) a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .sign-up {
+        margin-left: auto;
+    }
+
+    .sign-up a {
+        background-color: #4a4a4a;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .sign-up a:hover {
+        background-color: #2A3439;
+        border-color: #60a5fa;
+        color: #ffffff;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/Pages/Index.html"><i data-lucide="home"></i>Home</a></li>
+                <li><a href="#"><i data-lucide="calendar"></i>Classes</a></li>
+                <li><a href="/Pages/Timetable/Gym_Access.html"><i data-lucide="clock"></i>Timetable</a></li>
+                <li><a href="/Pages/coaching/coaches.html"><i data-lucide="users"></i>Coaches</a></li>
+                <li class="sign-up"><a href="#"><i data-lucide="log-in"></i>Sign Up Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container" style="margin-top: 5rem;">
+        <h1>Our Services</h1>
+        <p class="subtitle">
+            Discover our comprehensive range of professional services designed to help you achieve your fitness goals
+        </p>
+        
+        <div class="services-grid" id="services-container">
+            <!-- Cards will be inserted here by JavaScript -->
+        </div>
+    </div>
+    <script>
+        const services = [
+            {
+                title: "Personal Training",
+                description: "Custom workout plans tailored to your fitness goals and needs",
+                details: "Get one-on-one attention from certified trainers who will create personalized workout programs, provide nutritional guidance, and help you achieve your fitness goals safely and effectively.",
+                icon: "dumbbell",
+                image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            },
+            {
+                title: "Health Coaching",
+                description: "Comprehensive wellness guidance for a healthier lifestyle",
+                details: "Our health coaches work with you to develop sustainable lifestyle changes, focusing on nutrition, stress management, sleep quality, and overall wellness strategies.",
+                icon: "heart",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            },
+            {
+                title: "HIIT Classes",
+                description: "High-intensity interval training sessions for maximum results",
+                details: "Join our energetic HIIT classes designed to boost metabolism, burn fat, and improve cardiovascular fitness through scientifically proven interval training methods.",
+                icon: "timer",
+                image: "https://images.unsplash.com/photo-1571019613531-fbeaeb5b5a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            },
+            {
+                title: "Competition Prep",
+                description: "Expert guidance for fitness competitions and achievements",
+                details: "Specialized training programs for athletes preparing for competitions, including customized nutrition plans, posing practice, and competition strategy development.",
+                icon: "trophy",
+                image: "https://images.unsplash.com/photo-1571019613576-2b22c76fd955?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+            }
+        ];
+
+        function createServiceCard(service) {
+            return `
+                <div class="service-card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="${service.image}" alt="${service.title}" class="card-image">
+                            <div class="image-overlay"></div>
+                            <div class="card-content">
+                                <div class="icon-wrapper">
+                                    <i data-lucide="${service.icon}"></i>
+                                </div>
+                                <h3 class="card-title">${service.title}</h3>
+                                <p class="card-description">${service.description}</p>
+                                <span class="learn-more">Hover to learn more →</span>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="icon-wrapper">
+                                <i data-lucide="${service.icon}"></i>
+                            </div>
+                            <h4 class="card-title">${service.title}</h4>
+                            <p class="card-details">${service.details}</p>
+                            <button class="get-started-btn">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('services-container');
+            container.innerHTML = services.map(service => createServiceCard(service)).join('');
+            
+            // Initialize Lucide icons
+            lucide.createIcons();
+            
+            // Add click event listeners to buttons
+            document.querySelectorAll('.get-started-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    alert('Thank you for your interest! We will contact you soon.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

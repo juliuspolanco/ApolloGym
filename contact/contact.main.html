@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apollo Gym - Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="border-b">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="nav-container">
+                    <div class="logo">
+                        <span class="text-xl font-bold">Apollo Gym</span>
+                    </div>
+                    <div class="nav-links">
+                        <a href="/Pages/Index.html" class="nav-link">
+                            <i data-lucide="home"></i>
+                            <span>Home</span>
+                        </a>
+                        <a href="/Pages/services/classes.html" class="nav-link">
+                            <i data-lucide="dumbbell"></i>
+                            <span>Classes</span>
+                        </a>
+                        <a href="/Pages/Timetable/Gym_Access.html" class="nav-link">
+                            <i data-lucide="calendar"></i>
+                            <span>Timetable</span>
+                        </a>
+                        <a href="/Pages/coaching/coaches.html" class="nav-link">
+                            <i data-lucide="users"></i>
+                            <span>Coaches</span>
+                        </a>
+                    </div>
+                    <button class="signup-btn">Sign Up Now</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contact Section -->
+        <div class="max-w-7xl mx-auto px-4 py-16">
+            <h1 class="text-4xl font-bold text-center mb-2">Contact Us</h1>
+            <p class="text-gray-400 text-center mb-12">
+                Get in touch with us for any questions about our services
+            </p>
+
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2 class="text-2xl font-semibold mb-6">Send us a message</h2>
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label class="form-label">Name</label>
+                            <input type="text" name="user_name" required class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">Email</label>
+                            <input type="email" name="user_email" required class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">Phone</label>
+                            <input type="tel" name="user_phone" required class="form-input">
+                        </div>
+                        <div>
+                            <label class="form-label">Message</label>
+                            <textarea name="message" required rows="4" class="form-input"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2 class="text-2xl font-semibold mb-6">Contact Information</h2>
+                    <div class="space-y-6">
+                        <div class="info-item">
+                            <i data-lucide="phone"></i>
+                            <div>
+                                <h3 class="font-medium">Phone</h3>
+                                <p class="text-gray-400">0412303524</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="mail"></i>
+                            <div>
+                                <h3 class="font-medium">Email</h3>
+                                <p class="text-gray-400">mightyapollogym@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <i data-lucide="map-pin"></i>
+                            <div>
+                                <h3 class="font-medium">Location</h3>
+                                <p class="text-gray-400">Apollo Gym Open 24 hrs</p>
+                                <p class="text-gray-400">Unit 14/2 Burleigh St</p>
+                                <p class="text-gray-400">Spotswood, VIC 3015</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Google Maps Embed -->
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.8885!2d144.8885!3d-37.8307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad666d5b6b6b6b%3A0x6b6b6b6b6b6b6b6b!2sApollo%20Gym%20Open%2024%20hrs!5e0!3m2!1sen!2sau!4v1710472841037!5m2!1sen!2sau"
+                            width="100%"
+                            height="100%"
+                            style="border:0"
+                            allowfullscreen
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Container -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+    <script src="contact.js"></script>
+</body>
+</html>

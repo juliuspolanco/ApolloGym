@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apollo Gyms</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: black;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header styles */
+        .header {
+            background-color: black;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            text-decoration: underline;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .sign-up-btn {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .sign-up-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+
+
+
+        /* Coaches section */
+        .coaches-section {
+            padding: 5rem 1rem;
+            background-color: #18181b;
+        }
+
+        .section-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .coaches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .coach-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .coach-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .coach-card:hover .coach-image {
+            transform: scale(1.1);
+        }
+
+        .coach-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .coach-card:hover .coach-info {
+            transform: translateY(0);
+        }
+
+        .coach-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .coach-specialty {
+            color: #d1d5db;
+        }
+
+        /* Contact section */
+        .contact-section {
+            padding: 5rem 1rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-text {
+            color: #9ca3af;
+            margin-bottom: 2rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        input, textarea {
+            padding: 0.75rem;
+            background-color: #18181b;
+            border: 1px solid #27272a;
+            border-radius: 0.375rem;
+            color: white;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: white;
+            color: black;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 1rem;
+            border-top: 1px solid #27272a;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .copyright {
+            color: #9ca3af;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .header {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="/Pages/Index.html" class="nav-link">
+            <i data-lucide="home" class="icon"></i>
+            <span>Home</span>
+        </a>
+
+        <nav class="nav-menu">
+            <a href="/Pages/services/classes.html" class="nav-link">
+                <i data-lucide="dumbbell" class="icon"></i>
+                <span>Classes</span>
+            </a>
+            <a href="/Pages/Timetable/Gym_Access.html" class="nav-link">
+                <i data-lucide="calendar" class="icon"></i>
+                <span>Timetable</span>
+            </a>
+            <a href="/Pages/coaching/coaches.html" class="nav-link">
+                <i data-lucide="users" class="icon"></i>
+                <span>Coaches</span>
+            </a>
+        </nav>
+
+        <button class="sign-up-btn">Sign Up Now</button>
+    </header>
+
+    <!-- Coaches Section -->
+    <section class="coaches-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Coaches</h2>
+            <div class="coaches-grid" id="coachesGrid">
+                <!-- Coaches will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2 class="section-title">Get In Touch</h2>
+                    <p class="contact-text">
+                        Ready to transform your fitness journey? Contact us today to schedule a consultation with one of our
+                        expert coaches.
+                    </p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i data-lucide="phone" class="icon"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <i data-lucide="mail" class="icon"></i>
+                            <span>contact@apollogyms.com</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-grid">
+                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="Last Name" required>
+                    </div>
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Phone Number">
+                    <textarea placeholder="Tell us about your fitness goals..." required></textarea>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="copyright">© 2025 Apollo Gyms. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Coaches data
+        const coaches = [
+            {
+                name: "Alex Thompson",
+                specialty: "Strength & Conditioning",
+                image: "/placeholder.svg?height=600&width=450"
+            },
+            {
+                name: "Sarah Martinez",
+                specialty: "HIIT & Functional Training",
+                image: "/placeholder.svg?height=600&width=450"
+            },
+            {
+                name: "Mike Johnson",
+                specialty: "Competition Prep",
+                image: "/placeholder.svg?height=600&width=450"
+            },
+            {
+                name: "Emma Wilson",
+                specialty: "Nutrition & Wellness",
+                image: "/placeholder.svg?height=600&width=450"
+            },
+            {
+                name: "Chris Parker",
+                specialty: "CrossFit & Olympic Lifting",
+                image: "/placeholder.svg?height=600&width=450"
+            },
+            {
+                name: "Lisa Chen",
+                specialty: "Mobility & Recovery",
+                image: "/placeholder.svg?height=600&width=450"
+            }
+        ];
+
+        // Render coaches
+        function renderCoaches() {
+            const coachesGrid = document.getElementById('coachesGrid');
+            
+            coaches.forEach(coach => {
+                const coachCard = document.createElement('div');
+                coachCard.className = 'coach-card';
+                
+                coachCard.innerHTML = `
+                    <img src="${coach.image}" alt="${coach.name}" class="coach-image">
+                    <div class="coach-info">
+                        <h3 class="coach-name">${coach.name}</h3>
+                        <p class="coach-specialty">${coach.specialty}</p>
+                    </div>
+                `;
+                
+                coachesGrid.appendChild(coachCard);
+            });
+        }
+
+        // Handle contact form submission
+        function handleContactForm() {
+            const form = document.getElementById('contactForm');
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simulate form submission
+                const submitBtn = form.querySelector('.submit-btn');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Message sent successfully! We\'ll be in touch soon.');
+                    form.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCoaches();
+            handleContactForm();
+        });
+    </script>
+</body>
+</html>
